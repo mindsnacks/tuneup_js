@@ -60,6 +60,10 @@ opts_parser = OptionParser.new do |opts|
   opts.on("-x", "--xunit", "Create Xunit formatted test result file in the output directory") do
     options.xunit = true;
   end
+
+  opts.on("-g", "--groupname", "Prepends a name to the test methods. Must have -x enabled") do |groupname|
+    options.groupname = groupname;
+  end
 end
 
 unless ARGV.length >= 3
@@ -90,7 +94,7 @@ unless options.quiet    # HINT this could be moved into the actual options parsi
 end
 if options.xunit
   report_filename = File.join(test_output, File.basename(test_script, File.extname(test_script)) + ".xml")
-  outputs << XunitOutput.new(report_filename)
+  outputs << XunitOutput.new(report_filename, option.groupname)
 end
 
 

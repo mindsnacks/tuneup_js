@@ -56,8 +56,9 @@ end
 
 # Creates a XML report that conforms to # https://svn.jenkins-ci.org/trunk/hudson/dtkit/dtkit-format/dtkit-junit-model/src/main/resources/com/thalesgroup/dtkit/junit/model/xsd/junit-4.xsd
 class XunitOutput
-  def initialize(filename)
+  def initialize(filename, groupname)
     @filename = filename
+    @groupname = groupname
     @suite = TestSuite.new(File.basename(filename, File.extname(filename)))
   end
   
@@ -80,7 +81,7 @@ class XunitOutput
   end
   
   def close
-    File.open(@filename, 'w') { |f| f.write(serialize(@suite)) }
+    File.open(@filename, 'w') { |f| f.write(serialize(@suite, @groupname)) }
   end
   
   def xml_escape(input)
@@ -95,9 +96,14 @@ class XunitOutput
      return result
   end
   
-  def serialize(suite)
+  def serialize(suite, groupname)
+    suitename = suite.name
+    if groupname
+      suitename = groupname + " - " + suitename
+    end
+    
     output = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>" << "\n"
-    output << "<testsuite name=\"#{xml_escape(suite.name)}\" timestamp=\"#{suite.timestamp}\" time=\"#{suite.time}\" tests=\"#{suite.test_cases.count}\" failures=\"#{suite.failures}\">" << "\n"
+    output << "<testsuite name=\"#{xml_escape(suitename)}\" timestamp=\"#{suite.timestamp}\" time=\"#{suite.time}\" tests=\"#{suite.test_cases.count}\" failures=\"#{suite.failures}\">" << "\n"
     
     suite.test_cases.each do |test|
       output << "  <testcase name=\"#{xml_escape(test.name)}\" time=\"#{test.time}\">" << "\n"
