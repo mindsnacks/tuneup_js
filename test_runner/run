@@ -61,7 +61,7 @@ opts_parser = OptionParser.new do |opts|
     options.xunit = true;
   end
 
-  opts.on("-g", "--groupname", "Prepends a name to the test methods. Must have -x enabled") do |groupname|
+  opts.on("-g g", "--groupname", "Prepends a name to the test methods. Must have -x enabled") do |groupname|
     options.groupname = groupname;
   end
 end
