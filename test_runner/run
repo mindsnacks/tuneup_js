@@ -94,7 +94,7 @@ unless options.quiet    # HINT this could be moved into the actual options parsi
 end
 if options.xunit
   report_filename = File.join(test_output, File.basename(test_script, File.extname(test_script)) + ".xml")
-  outputs << XunitOutput.new(report_filename, option.groupname)
+  outputs << XunitOutput.new(report_filename, options.groupname)
 end
 
 
