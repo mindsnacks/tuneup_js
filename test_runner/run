@@ -96,7 +96,7 @@ if options.xunit
   suffix = options.groupname ? ('_' + options.groupname) : ''
 
   report_filename = File.join(test_output, File.basename(test_script, File.extname(test_script)) + suffix + ".xml")
-  outputs << XunitOutput.new(report_filename, options.groupname)
+  outputs << XunitOutput.new(report_filename)
 end
 
 
