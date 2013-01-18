@@ -93,7 +93,9 @@ unless options.quiet    # HINT this could be moved into the actual options parsi
   outputs << (options.colorize ? ColoredConsoleOutput.new : ConsoleOutput.new)
 end
 if options.xunit
-  report_filename = File.join(test_output, File.basename(test_script, File.extname(test_script)) + ".xml")
+  suffix = options.groupname ? ('_' + options.groupname) : ''
+
+  report_filename = File.join(test_output, File.basename(test_script, File.extname(test_script)) + suffix + ".xml")
   outputs << XunitOutput.new(report_filename, options.groupname)
 end
 
