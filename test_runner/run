@@ -170,7 +170,7 @@ if options.preprocess or options.run
   # apply custom preprocessing to test_script  
   if options.preprocess
     puts "Preprocessing file..." if options.verbose
-    temp_file.write(Preprocessor.process test_script)
+    temp_file.write(Preprocessor.process test_script, app_name)
     puts "contents written to temp file #{temp_file.path}", "\n" if options.verbose
   end
   
