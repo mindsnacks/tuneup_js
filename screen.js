@@ -1,4 +1,4 @@
-Screen = {
+var Screen = {
   screens: {},
   
   add: function(name, definition) {
