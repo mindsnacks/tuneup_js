@@ -36,8 +36,8 @@ function test(title, f, options) {
       logTree: true
     };
   }  
-  target = UIATarget.localTarget();
-  application = target.frontMostApp();
+  var target = UIATarget.localTarget(),
+      application = target.frontMostApp();
   UIALogger.logStart(title);
   try {
     f(target, application);

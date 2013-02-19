@@ -276,9 +276,9 @@ function assertElementTree(element, definition) {
  * });
  */
 function assertWindow(window) {
-  target = UIATarget.localTarget();
-  application = target.frontMostApp();
-  mainWindow = application.mainWindow();
+  var target = UIATarget.localTarget(),
+      application = target.frontMostApp(),
+      mainWindow = application.mainWindow();
 
   assertElementTree(mainWindow, window);
 }
